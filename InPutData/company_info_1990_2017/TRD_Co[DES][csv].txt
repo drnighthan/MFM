@@ -1,0 +1,29 @@
+﻿Cuntrycd [国家代码] - 本数据库以10表示中国
+Stkcd [证券代码] - 以上交所、深交所公布的证券代码为准
+Stknme [证券简称] - 以交易所公布的中文简称为准
+Conme [公司全称] - 以公司公布的中文名为准
+Conme_en [公司英文全称] - 以公司公布的英文名为准
+Indcd [行业代码A] - 0001=金融，0002=公用事业，0003=房地产，0004=综合，0005=工业，0006=商业
+Indnme [行业名称A] - Finance=金融，Utilities=公用事业，Properties=房地产，Conglomerates=综合，Industrials=工业，Commerce=商业
+Nindcd [行业代码B] - 2001版证监会行业分类代码
+
+Nindnme [行业名称B] - 2001版证监会行业分类名称
+Nnindcd [行业代码C] - 2012版证监会行业分类代码
+Nnindnme [行业名称C] - 2012版证监会行业分类名称
+Estbdt [公司成立日期] - 以YYYY-MM-DD列示，部分缺少在相应位置上以00表示，如1993年12月某日表示为1993-12-00
+Listdt [上市日期] - 以YYYY-MM-DD表示，上市日期为此股票证券代码的上市日期.
+Favaldt [数据库最早交易记录的日期] - 以YYYY-MM-DD列示
+Curtrd [数据库中交易数据的计量货币] - A股以人民币元计价，上海B股以美元计价，深圳B股以港币计价，CNY=人民币元，HKD=港币，USD=美元
+Ipoprm [股票发行溢价] - 缺少以-9666表示
+Ipoprc [发行价格] - 缺少以-9666表示
+Ipocur [发行价格的计量货币] - CNY=人民币元，HKD=港币，USD=美元
+Nshripo [发行数量] - 缺少值以-9666表示
+Parvcur [股票面值的计量货币] - 计量货币：人民币元，CNY=人民币元
+Ipodt [发行日期] - 以YYYY-MM-DD表示
+Parval [股票面值] - 
+Sctcd [区域码] - 1=上海，2=深圳
+Statco [公司活动情况] - A=正常交易，D＝终止上市，S=暂停上市， N=停牌
+Crcd [AB股交叉码] - A股和B股的交叉码，指同时拥有A股和B股的公司的A（B）股对应的B（A）股代码
+Statdt [情况变动日] - 以YYYY-MM-DD表示
+Commnt [H股交叉码] - NULL：表示没有交叉码
+Markettype [市场类型] - 1=上海A，2=上海B，4=深圳A，8=深圳B,  16=创业板
