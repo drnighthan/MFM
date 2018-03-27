@@ -26,12 +26,8 @@ def FactorReturnEstimation(df,time,stock,factorlist,method='WLS',indcode = '2012
     temp = pd.get_dummies(industry[industryname])
     industry = pd.concat([industry[['Stkcd']],temp],axis=1)
     industry = industry.rename({'Stkcd':str(stock)})
-    retdatapath = os.path.join(os.path.abspath('.'),'InPutData','monthly_return_2005-2017')
-    retdata = pd.DataFrame()
-    for i in os.listdir(retdatapath):
-        temp = os.path.join(retdatapath,i,'TRD_Mnth.csv')
-        temp = pd.read_csv(temp,parse_dates = ['Trdmnt'])
-        retdata = pd.concat([retdata,temp],axis=0)
+    retdatapath = os.path.join(os.path.abspath('.'),'InPutData','monthly_return_2005-2018','TRD_Mnth.txt')
+    retdata = pd.read_table(retdatapath,parse_dates = ['Trdmnt'])
     retdata = retdata[retdata['Markettype']!= 2]
     retdata = retdata[retdata['Markettype']!= 8]
     '''选择了总市值作为权重'''

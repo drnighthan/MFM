@@ -59,7 +59,7 @@ def PortfoiloOptimzer(specificriskall,covlist,time,stock,hedge=False,hedgefactor
             stockfactortemp = stockfactor[stockfactor[str(time)]==i]
             stockfactortemp = stockfactortemp[stockfactortemp[str(stock)].isin(commonstock)]
             hedgefactortemp = hedgefactor[hedgefactor[str(time)]==i]
-            if len(stockfactortemp) == len(hedgefactortemp):
+            if  list(stockfactortemp[str(time)].drop_duplicates()) == list(hedgefactortemp[str(time)]):
                 if not pd.isnull(Purefactor):
                     hedgefactortemp[Purefactor] += 1
                     print('Min Var with Purefactor : %s' %(Purefactor))
@@ -72,12 +72,12 @@ def PortfoiloOptimzer(specificriskall,covlist,time,stock,hedge=False,hedgefactor
                     A = matrix(np.array(stockfactortemp.T))
                     b = matrix(np.array(hedgefactortemp.T))
                     sol = solvers.qp(P,q,G,h,A,b)
-                optim_result = pd.DataFrame(np.array(sol['x']))
-                optim_result['status'] = sol['status']
-                optim_result['Stkcd'] = commonstock
-                optim_result['Trddt'] = i
-                optim_result = optim_result.rename(columns={0: "optim"})
-                result = pd.concat([result,optim_result],axis=0)
+                    optim_result = pd.DataFrame(np.array(sol['x']))
+                    optim_result['status'] = sol['status']
+                    optim_result['Stkcd'] = commonstock
+                    optim_result['Trddt'] = i
+                    optim_result = optim_result.rename(columns={0: "optim"})
+                    result = pd.concat([result,optim_result],axis=0)
                 else:
                     print('Factor not common')
             else:
@@ -88,7 +88,11 @@ def PortfoiloOptimzer(specificriskall,covlist,time,stock,hedge=False,hedgefactor
 if __name__ == '__main__' :
     SpecificRisk = os.path.join(os.path.abspath('.'),'Data','SpecificRisk.csv')
     Covariance = os.path.join(os.path.abspath('.'),'Data','CovarianceEstimation')
-    hfactor = os.path.join(os.path.abspath('.'),'Data','sample_hs300.csv')
+    hfactor = os.path.join(os.path.abspath('.'),'InPutData','sample_hs300.csv')
     sfactor = os.path.join(os.path.abspath('.'),'Data','Factor_Preprocessing.csv')
     flist = ['beta','BP','earningsfactor','leveragefactor','RSTR','residualvolatilityfactor','Size']
-    test = PortfoiloOptimzer(SpecificRisk,Covariance,'Trddt','Stkcd',hedge=False,hedgefactor=hfactor,stockfactor=sfactor,factorlist=flist,Purefactor='Size')
+    test = PortfoiloOptimzer(SpecificRisk,Covariance,'Trddt','Stkcd',hedge=True,hedgefactor=hfactor,stockfactor=sfactor,factorlist=flist)
+    testpath = os.path.join(os.path.abspath('.'),'Data','result.csv')
+    test.to_csv(testpath)
+    
+    
