@@ -54,3 +54,10 @@ if __name__ == '__main__' :
     test = processing('C:/Users/Han/Downloads/R code NCFR/BarraStep/datasample/barrafactor.csv','Trddt','Stkcd'
                ,['beta', 'BP', 'earningsfactor','leveragefactor', 'RSTR', 'Non-Linear Size', 'residualvolatilityfactor','Size'])
     test.to_csv(os.path.join(os.path.abspath('.'),'Data','Factor_Preprocessing.csv'))
+#    test = processing('C:/Users/Han/Downloads/GitHub/MFM/Data/ValueFactor.csv','Trddt','Stkcd'
+#               ,['Netcashflow', 'Operatingcashflow', 'EP','EPcut', 'Sales', 'FCF', 'NetAsset','EV2ToEBITDA'])
+#    test.to_csv(os.path.join(os.path.abspath('.'),'Data','Value_Factor_Preprocessing.csv'))
+
+    
+    
+    

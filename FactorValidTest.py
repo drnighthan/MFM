@@ -29,12 +29,16 @@ def Factorrettest(factordataset,stock,time,factor,retname,indcode = '2012'):
     temp = pd.get_dummies(industry[industryname])
     industry = pd.concat([industry[['Stkcd']],temp],axis=1)
     industry = industry.rename({'Stkcd':str(stock)})
-    retdatapath = os.path.join(os.path.abspath('.'),'InPutData','monthly_return_2005-2017')
+#    retdatapath = os.path.join(os.path.abspath('.'),'InPutData','monthly_return_2005-2017')
+#    retdata = pd.DataFrame()
+#    for i in os.listdir(retdatapath):
+#        temp = os.path.join(retdatapath,i,'TRD_Mnth.csv')
+#        temp = pd.read_csv(temp,parse_dates = ['Trdmnt'])
+#        retdata = pd.concat([retdata,temp],axis=0)
+    retdatapath = os.path.join(os.path.abspath('.'),'InPutData','monthly_return_2005-2018')
     retdata = pd.DataFrame()
-    for i in os.listdir(retdatapath):
-        temp = os.path.join(retdatapath,i,'TRD_Mnth.csv')
-        temp = pd.read_csv(temp,parse_dates = ['Trdmnt'])
-        retdata = pd.concat([retdata,temp],axis=0)
+    temp = os.path.join(retdatapath,'TRD_Mnth.txt')
+    retdata = pd.read_table(temp,parse_dates = ['Trdmnt'])
     retdata = retdata[retdata['Markettype']!= 2]
     retdata = retdata[retdata['Markettype']!= 8]
     retdata = retdata[['Stkcd','Trdmnt','Mretnd']]
@@ -81,3 +85,8 @@ if __name__ == '__main__' :
     factorlist = ['beta', 'BP', 'earningsfactor', 'leveragefactor','RSTR', 'Non-Linear Size', 'residualvolatilityfactor', 'Size']
     for i in factorlist:
         resultall[i] = Factorrettest(factordataset,'Stkcd','Trddt',i,'Mretnd',indcode = '2012')
+#    factordataset = os.path.join(os.path.abspath('.'),'Data','Value_Factor_Preprocessing.csv')
+#    resultall = dict()
+#    factorlist = ['Netcashflow', 'Operatingcashflow', 'EP','EPcut', 'Sales', 'FCF', 'NetAsset','EV2ToEBITDA']
+#    for i in factorlist:
+#        resultall[i] = Factorrettest(factordataset,'Stkcd','Trddt',i,'Mretnd',indcode = '2012')
